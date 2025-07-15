@@ -1,0 +1,64 @@
+<div class="project-card animate-on-scroll stagger-item {% if project.is_featured %}featured{% endif %}">
+    {% if project.is_featured %}
+        <div class="featured-badge">
+            <i class="fas fa-star"></i> Featured
+        </div>
+    {% endif %}
+    
+    <div class="project-image">
+        {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+        {% else %}
+            <div class="project-placeholder">
+                <i class="fas fa-code"></i>
+                <div class="code-lines">
+                    <div class="code-line"></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"></div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="project-overlay">
+            <div class="project-actions">
+                {% if project.project_link %}
+                    <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="btn btn-sm">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                {% endif %}
+                {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">
+                        <i class="fab fa-github"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="project-content">
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description|truncatewords:20 }}</p>
+        
+        <div class="project-tech">
+            {% for framework in project.get_frameworks_list %}
+                <span class="tech-tag">{{ framework }}</span>
+            {% endfor %}
+        </div>
+        
+        <div class="project-links">
+            {% if project.project_link %}
+                <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="btn btn-sm">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+            {% endif %}
+            {% if project.github_link %}
+                <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">
+                    <i class="fab fa-github"></i> Code
+                </a>
+            {% endif %}
+            <a href="{% url 'main:project_detail' project.id %}" class="btn btn-sm btn-outline">
+                <i class="fas fa-info-circle"></i> Details
+            </a>
+        </div>
+    </div>
+</div>

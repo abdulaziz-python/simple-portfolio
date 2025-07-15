@@ -88,4 +88,34 @@
                         <div class="terminal-dots">
                             <div class="terminal-dot red"></div>
                             <div class="terminal-dot yellow"></div>
-                            <div
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">request.log</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="code">
+                            <span style="color: var(--error-color);">ERROR 400:</span> <span style="color: var(--secondary-text);">Bad request</span><br>
+                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">curl</span> <span style="color: var(--warning-color);">-X POST</span> <span style="color: var(--accent-text);">{{ request.path }}</span><br>
+                            <span style="color: var(--error-color);">HTTP/1.1 400 Bad Request</span><br>
+                            <span style="color: var(--secondary-text);">Content-Type: application/json</span><br>
+                            <span style="color: var(--terminal-green);"># Check your request format and try again</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="error-actions">
+                <a href="{% url 'main:home' %}" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Go Home
+                </a>
+                <a href="javascript:history.back()" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> Contact
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

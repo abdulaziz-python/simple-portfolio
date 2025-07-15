@@ -7,14 +7,6 @@ from .models import About, Experience, Project, ContactMessage, Skill
 @admin.register(About)
 class AboutAdmin(admin.ModelAdmin):
     list_display = ['name', 'title', 'location', 'years_of_experience', 'updated_at']
-    fields = [
-        'name', 'title', 'description', 'profile_image', 'resume_file',
-        'github_username', 'telegram_username', 'blog_handle', 'channel_handle',
-        'linkedin_url', 'twitter_url', 'website_url',
-        'skills', 'location', 'email', 'phone',
-        'years_of_experience', 'current_status',
-        'meta_description', 'meta_keywords'
-    ]
     readonly_fields = ['created_at', 'updated_at']
     
     fieldsets = (
