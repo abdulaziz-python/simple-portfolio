@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found - 404{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-content {
+    max-width: 600px;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.error-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+}
+
+.error-description {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.error-terminal {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 6rem;
+    }
+    
+    .error-title {
+        font-size: 1.5rem;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-description">
+                Oops! The page you're looking for seems to have vanished into the digital void. 
+                Don't worry, even the best developers encounter 404s!
+            </p>
+            
+            <div class="error-terminal">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">error.log</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="code">
+                            <span style="color: var(--error-color);">ERROR 404:</span> <span style="color: var(--secondary-text);">Page not found</span><br>
+                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">find</span> <span style="color: var(--warning-color);">{{ request.path }}</span><br>
+                            <span style="color: var(--secondary-text);">find: '{{ request.path }}': No such file or directory</span><br>
+                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">ls</span> <span style="color: var(--warning-color);">available_pages/</span><br>
+                            <span style="color: var(--accent-text);">home.html  about.html  projects.html</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="error-actions">
+                <a href="{% url 'main:home' %}" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Go Home
+                </a>
+                <a href="{% url 'main:projects' %}" class="btn btn-secondary">
+                    <i class="fas fa-code"></i> View Projects
+                </a>
+                <a href="{% url 'main:about' %}" class="btn btn-outline">
+                    <i class="fas fa-user"></i> About Me
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Access Forbidden - 403{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-content {
+    max-width: 600px;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #d29922 0%, #ffa657 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.error-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+}
+
+.error-description {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.error-terminal {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 6rem;
+    }
+    
+    .error-title {
+        font-size: 1.5rem;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-code">403</div>
+            <h1 class="error-title">Access Forbidden</h1>
+            <p class="error-description">
+                You don't have permission to access this resource. 
+                It's like trying to access root without sudo privileges!
+            </p>
+            
+            <div class="error-terminal">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">access.log</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="code">
+                            <span style="color: var(--warning-color);">WARNING 403:</span> <span style="color: var(--secondary-text);">Access forbidden</span><br>
+                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">chmod</span> <span style="color: var(--warning-color);">755</span> <span style="color: var(--accent-text);">{{ request.path }}</span><br>
+                            <span style="color: var(--error-color);">chmod:</span> <span style="color: var(--secondary-text);">Operation not permitted</span><br>
+                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">whoami</span><br>
+                            <span style="color: var(--secondary-text);">guest</span><br>
+                            <span style="color: var(--terminal-green);"># You need proper permissions to access this resource</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="error-actions">
+                <a href="{% url 'main:home' %}" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Go Home
+                </a>
+                <a href="{% url 'main:about' %}" class="btn btn-secondary">
+                    <i class="fas fa-user"></i> About Me
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> Contact
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Server Error - 500{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-content {
+    max-width: 600px;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f85149 0%, #ff6b6b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.error-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+}
+
+.error-description {
+    font-size: 1.1rem;
+    color: var(--secondary-text);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.error-terminal {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 6rem;
+    }
+    
+    .error-title {
+        font-size: 1.5rem;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-code">500</div>
+            <h1 class="error-title">Internal Server Error</h1>
+            <p class="error-description">
+                Something went wrong on our end. Our servers are having a moment - 
+                like when your code works on your machine but not in production!
+            </p>
+            
+            <div class="error-terminal">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">server.log</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="code">
+                            <span style="color: var(--error-color);">ERROR 500:</span> <span style="color: var(--secondary-text);">Internal server error</span><br>
+                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">systemctl</span> <span style="color: var(--warning-color);">status</span> <span style="color: var(--accent-text);">portfolio</span><br>
+                            <span style="color: var(--error-color);">●</span> <span style="color: var(--secondary-text);">portfolio.service - Portfolio Application</span><br>
+                            <span style="color: var(--warning-color);">   Active: </span><span style="color: var(--error-color);">failed</span> <span style="color: var(--secondary-text);">(Result: exit-code)</span><br>
+                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">sudo</span> <span style="color: var(--warning-color);">systemctl</span> <span style="color: var(--accent-text);">restart</span> <span style="color: var(--terminal-green);">portfolio</span><br>
+                            <span style="color: var(--terminal-green);">Restarting service...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="error-actions">
+                <a href="{% url 'main:home' %}" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Go Home
+                </a>
+                <a href="javascript:location.reload()" class="btn btn-secondary">
+                    <i class="fas fa-redo"></i> Try Again
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-envelope"></i> Report Issue
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
