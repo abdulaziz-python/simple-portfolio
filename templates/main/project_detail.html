@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} - Abdulaziz Hamidjonov{% endblock %}
+
+{% block content %}
+<section class="project-detail">
+    <div class="container">
+        <div class="project-header">
+            <a href="{% url 'main:projects' %}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            
+            {% if project.is_featured %}
+                <span class="featured-badge">Featured Project</span>
+            {% endif %}
+        </div>
+        
+        <div class="project-content">
+            <div class="project-info">
+                <h1>{{ project.title }}</h1>
+                
+                <div class="project-tech">
+                    {% for framework in project.get_frameworks_list %}
+                        <span class="tech-tag">{{ framework }}</span>
+                    {% endfor %}
+                </div>
+                
+                <div class="project-description">
+                    <p>{{ project.description|linebreaks }}</p>
+                </div>
+                
+                <div class="project-actions">
+                    {% if project.project_link %}
+                        <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i> View Live Project
+                        </a>
+                    {% endif %}
+                    {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="btn btn-secondary">
+                            <i class="fab fa-github"></i> View Source Code
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="project-image">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                {% else %}
+                    <div class="project-placeholder">
+                        <i class="fas fa-code"></i>
+                        <p>Project Screenshot</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

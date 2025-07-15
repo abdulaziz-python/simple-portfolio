@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - {{ about.name }}{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h1>About Me</h1>
+                <h2>{{ about.title }}</h2>
+                <p>{{ about.description }}</p>
+                
+                {% if about.resume_file %}
+                    <a href="{{ about.resume_file.url }}" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                {% endif %}
+            </div>
+            
+            <div class="about-image">
+                {% if about.profile_image %}
+                    <img src="{{ about.profile_image.url }}" alt="{{ about.name }}">
+                {% else %}
+                    <div class="placeholder-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="experience">
+    <div class="container">
+        <h2 class="section-title">Experience & Education</h2>
+        <div class="timeline">
+            {% for exp in experiences %}
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>{{ exp.title }}</h3>
+                            <span class="timeline-type">{{ exp.get_experience_type_display }}</span>
+                        </div>
+                        <h4>{{ exp.company_or_institution }}</h4>
+                        {% if exp.location %}
+                            <p class="timeline-location">{{ exp.location }}</p>
+                        {% endif %}
+                        <p class="timeline-date">
+                            {{ exp.start_date|date:"M Y" }} - 
+                            {% if exp.is_current %}
+                                Present
+                            {% elif exp.end_date %}
+                                {{ exp.end_date|date:"M Y" }}
+                            {% else %}
+                                Present
+                            {% endif %}
+                        </p>
+                        <p class="timeline-description">{{ exp.description }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="no-content">Experience information will be added soon.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="skills-detailed">
+    <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-categories">
+            <div class="skill-category">
+                <h3>AI/ML & Data Science</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">Deep Learning</span>
+                    <span class="skill-tag">Data Analysis</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Backend Development</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">Django REST Framework</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Bot Development</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Aiogram</span>
+                    <span class="skill-tag">Telebot</span>
+                    <span class="skill-tag">Telegram API</span>
+                    <span class="skill-tag">Payment Systems</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>DevOps & Tools</h3>
+                <div class="skill-items">
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">CI/CD</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

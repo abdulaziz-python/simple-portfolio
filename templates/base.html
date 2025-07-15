@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Abdulaziz Hamidjonov - AI/ML & Backend Developer{% endblock %}</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Abdulaziz Hamidjonov - AI/ML & Backend Developer specializing in Python, Django, and Telegram Bot development">
+    <meta name="keywords" content="AI, ML, Backend, Python, Django, Telegram Bot, Developer, TensorFlow, Docker">
+    <meta name="author" content="Abdulaziz Hamidjonov">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Abdulaziz Hamidjonov - AI/ML & Backend Developer">
+    <meta property="og:description" content="Passionate AI/ML and Backend Developer specializing in Python, Django, and Telegram Bot development">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body data-theme="dark">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                    </div>
+                    <div class="terminal-title">portfolio.py</div>
+                </div>
+                <div class="terminal-content">
+                    <div class="loading-text">
+                        <span class="typing-text">$ python portfolio.py --initialize</span>
+                        <div class="loading"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="{% url 'main:home' %}">abdulaziz.dev</a>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="{% url 'main:home' %}" class="nav-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="{% url 'main:about' %}" class="nav-link">
+                    <i class="fas fa-user"></i> About
+                </a>
+                <a href="{% url 'main:projects' %}" class="nav-link">
+                    <i class="fas fa-code"></i> Projects
+                </a>
+                <a href="#contact" class="nav-link">
+                    <i class="fas fa-envelope"></i> Contact
+                </a>
+                
+                <button class="theme-toggle" id="theme-toggle" title="Toggle theme (Ctrl+D)">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+            
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-terminal"></i>
+                        Abdulaziz Hamidjonov
+                    </h3>
+                    <p>AI/ML & Backend Developer</p>
+                    <div class="code">
+                        <span class="text-gradient">while(alive) { eat(); code(); sleep(); }</span>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4><i class="fas fa-link"></i> Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/abdulaziz-python" target="_blank" rel="noopener" data-copy="https://github.com/abdulaziz-python">
+                            <i class="fab fa-github"></i> GitHub
+                            <span class="copy-hint">Click to copy</span>
+                        </a>
+                        <a href="https://t.me/ablaze_coder" target="_blank" rel="noopener">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                        <a href="https://t.me/fikrlog_all" target="_blank" rel="noopener">
+                            <i class="fas fa-blog"></i> Blog
+                        </a>
+                        <a href="https://t.me/pythonnews_uzbekistan" target="_blank" rel="noopener">
+                            <i class="fas fa-broadcast-tower"></i> Channel
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4><i class="fas fa-code"></i> Tech Stack</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    <p>&copy; 2024 Abdulaziz Hamidjonov. All rights reserved.</p>
+                    <div class="footer-meta">
+                        <span class="code">Built with Django & ❤️</span>
+                        <span class="separator">|</span>
+                        <span class="code">Last updated: <span id="last-updated"></span></span>
+                    </div>
+                </div>
+                <div class="footer-shortcuts">
+                    <span class="shortcut">
+                        <kbd>Ctrl</kbd> + <kbd>D</kbd> Theme
+                    </span>
+                    <span class="shortcut">
+                        <kbd>Ctrl</kbd> + <kbd>K</kbd> Search
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+    
+    <!-- Initialize last updated -->
+    <script>
+        document.getElementById('last-updated').textContent = new Date().toLocaleDateString();
+        
+        // Hide loading screen after page load
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 1000);
+            }
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

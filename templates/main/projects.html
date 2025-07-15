@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects - Abdulaziz Hamidjonov{% endblock %}
+
+{% block content %}
+<section class="projects-hero">
+    <div class="container">
+        <h1>My Projects</h1>
+        <p>A collection of projects showcasing my expertise in AI/ML, backend development, and automation.</p>
+    </div>
+</section>
+
+<section class="projects-showcase">
+    <div class="container">
+        <div class="projects-grid">
+            {% for project in projects %}
+                <div class="project-card {% if project.is_featured %}featured{% endif %}">
+                    {% if project.is_featured %}
+                        <div class="featured-badge">Featured</div>
+                    {% endif %}
+                    
+                    {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                    {% else %}
+                        <div class="project-placeholder">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="project-content">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description|truncatewords:25 }}</p>
+                        
+                        <div class="project-tech">
+                            {% for framework in project.get_frameworks_list %}
+                                <span class="tech-tag">{{ framework }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="project-links">
+                            {% if project.project_link %}
+                                <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="btn btn-sm">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            {% endif %}
+                            {% if project.github_link %}
+                                <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            {% endif %}
+                            <a href="{% url 'main:project_detail' project.id %}" class="btn btn-sm btn-outline">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-projects">
+                    <i class="fas fa-code"></i>
+                    <h3>Projects Coming Soon</h3>
+                    <p>I'm currently working on some exciting projects. Check back soon to see my latest work!</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

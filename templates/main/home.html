@@ -1,0 +1,682 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+}
+
+.loading-content {
+    max-width: 600px;
+    width: 90%;
+}
+
+.loading-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.copy-hint {
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.social-links a:hover .copy-hint {
+    opacity: 1;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.separator {
+    color: var(--border-color);
+}
+
+.footer-shortcuts {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.shortcut {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+}
+
+kbd {
+    background: var(--tertiary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.2rem 0.4rem;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-shortcuts {
+        justify-content: center;
+    }
+    
+    .footer-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+.image-container {
+    position: relative;
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.floating-element {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: var(--tertiary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-text);
+    animation: float 6s ease-in-out infinite;
+    animation-delay: var(--delay);
+}
+
+.floating-element:nth-child(1) { top: 10%; right: 10%; }
+.floating-element:nth-child(2) { top: 60%; left: 5%; }
+.floating-element:nth-child(3) { bottom: 20%; right: 20%; }
+.floating-element:nth-child(4) { top: 30%; left: 15%; }
+
+.project-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.code-lines {
+    margin-top: 2rem;
+}
+
+.code-line {
+    height: 4px;
+    background: var(--border-color);
+    margin: 0.5rem 0;
+    border-radius: 2px;
+}
+
+.code-line:nth-child(1) { width: 80%; }
+.code-line:nth-child(2) { width: 60%; }
+.code-line:nth-child(3) { width: 90%; }
+
+.form-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-header h3 {
+    margin-bottom: 0.5rem;
+}
+
+.form-footer {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(120deg); }
+    66% { transform: translateY(5px) rotate(240deg); }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text animate-on-scroll">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">~/developer/abdulaziz</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="code">
+                            <span style="color: var(--terminal-blue);">class</span> 
+                            <span style="color: var(--terminal-orange);">Developer</span>:<br>
+                            &nbsp;&nbsp;<span style="color: var(--terminal-blue);">def</span> 
+                            <span style="color: var(--terminal-green);">__init__</span>(self):<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;self.name = <span style="color: var(--warning-color);">"{{ about.name }}"</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;self.role = <span style="color: var(--warning-color);">"{{ about.title }}"</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;self.passion = <span style="color: var(--warning-color);">"AI/ML & Backend"</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h1 class="hero-title">
+                    Hi, I'm <span class="highlight typing-text">{{ about.name }}</span>
+                </h1>
+                <h2 class="hero-subtitle">{{ about.title }}</h2>
+                <p class="hero-description">{{ about.description }}</p>
+                
+                <div class="hero-buttons">
+                    <a href="{% url 'main:projects' %}" class="btn btn-primary">
+                        <i class="fas fa-code"></i> View Projects
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                    {% if about.resume_file %}
+                        <a href="{{ about.resume_file.url }}" target="_blank" class="btn btn-outline">
+                            <i class="fas fa-download"></i> Resume
+                        </a>
+                    {% endif %}
+                </div>
+                
+                <div class="hero-social">
+                    <a href="https://github.com/{{ about.github_username }}" target="_blank" rel="noopener" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://t.me/{{ about.telegram_username }}" target="_blank" rel="noopener" title="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://t.me/{{ about.blog_handle|slice:'1:' }}" target="_blank" rel="noopener" title="Blog">
+                        <i class="fas fa-blog"></i>
+                    </a>
+                    <a href="https://t.me/{{ about.channel_handle|slice:'1:' }}" target="_blank" rel="noopener" title="Channel">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image animate-on-scroll">
+                <div class="image-container">
+                    {% if about.profile_image %}
+                        <img src="{{ about.profile_image.url }}" alt="{{ about.name }}">
+                    {% else %}
+                        <div class="placeholder-image">
+                            <i class="fas fa-user-astronaut"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Floating elements -->
+                    <div class="floating-elements">
+                        <div class="floating-element" style="--delay: 0s;">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="floating-element" style="--delay: 1s;">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="floating-element" style="--delay: 2s;">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div class="floating-element" style="--delay: 3s;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="skills">
+    <div class="container">
+        <h2 class="section-title">
+            <i class="fas fa-terminal"></i> Technologies & Skills
+        </h2>
+        
+        <div class="skills-terminal animate-on-scroll">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                    </div>
+                    <div class="terminal-title">skills.sh</div>
+                </div>
+                <div class="terminal-content" id="skills-terminal">
+                    <!-- Terminal content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-grid">
+            {% for skill in about.skills|split:"," %}
+                <div class="skill-item animate-on-scroll stagger-item">
+                    <div class="skill-icon">
+                        {% if "Python" in skill %}
+                            <i class="fab fa-python"></i>
+                        {% elif "Django" in skill %}
+                            <i class="fas fa-server"></i>
+                        {% elif "TensorFlow" in skill or "AI" in skill or "ML" in skill %}
+                            <i class="fas fa-brain"></i>
+                        {% elif "Docker" in skill %}
+                            <i class="fab fa-docker"></i>
+                        {% elif "Git" in skill %}
+                            <i class="fab fa-git-alt"></i>
+                        {% elif "PostgreSQL" in skill %}
+                            <i class="fas fa-database"></i>
+                        {% elif "Telegram" in skill or "Bot" in skill %}
+                            <i class="fas fa-robot"></i>
+                        {% else %}
+                            <i class="fas fa-code"></i>
+                        {% endif %}
+                    </div>
+                    <span>{{ skill|trim }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects -->
+<section class="featured-projects">
+    <div class="container">
+        <h2 class="section-title">
+            <i class="fas fa-star"></i> Featured Projects
+        </h2>
+        
+        <div class="projects-grid">
+            {% for project in featured_projects %}
+                <div class="project-card animate-on-scroll stagger-item {% if project.is_featured %}featured{% endif %}">
+                    {% if project.is_featured %}
+                        <div class="featured-badge">
+                            <i class="fas fa-star"></i> Featured
+                        </div>
+                    {% endif %}
+                    
+                    <div class="project-image">
+                        {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+                        {% else %}
+                            <div class="project-placeholder">
+                                <i class="fas fa-code"></i>
+                                <div class="code-lines">
+                                    <div class="code-line"></div>
+                                    <div class="code-line"></div>
+                                    <div class="code-line"></div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="project-overlay">
+                            <div class="project-actions">
+                                {% if project.project_link %}
+                                    <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="btn btn-sm">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                {% endif %}
+                                {% if project.github_link %}
+                                    <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description|truncatewords:20 }}</p>
+                        
+                        <div class="project-tech">
+                            {% for framework in project.get_frameworks_list %}
+                                <span class="tech-tag">{{ framework }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="project-links">
+                            {% if project.project_link %}
+                                <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="btn btn-sm">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            {% endif %}
+                            {% if project.github_link %}
+                                <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            {% endif %}
+                            <a href="{% url 'main:project_detail' project.id %}" class="btn btn-sm btn-outline">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-projects animate-on-scroll">
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                            <div class="terminal-title">projects.py</div>
+                        </div>
+                        <div class="terminal-content">
+                            <div class="code">
+                                <span style="color: var(--terminal-blue);">print</span>(<span style="color: var(--warning-color);">"Projects loading..."</span>)<br>
+                                <span style="color: var(--terminal-green);"># Exciting projects coming soon!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        {% if featured_projects %}
+            <div class="text-center animate-on-scroll">
+                <a href="{% url 'main:projects' %}" class="btn btn-primary">
+                    <i class="fas fa-folder-open"></i> View All Projects
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact">
+    <div class="container">
+        <h2 class="section-title">
+            <i class="fas fa-terminal"></i> Get In Touch
+        </h2>
+        
+        <div class="contact-content">
+            <div class="contact-info animate-on-scroll">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <div class="terminal-dot red"></div>
+                            <div class="terminal-dot yellow"></div>
+                            <div class="terminal-dot green"></div>
+                        </div>
+                        <div class="terminal-title">contact.py</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="code">
+                            <span style="color: var(--terminal-blue);">def</span> 
+                            <span style="color: var(--terminal-green);">connect</span>():<br>
+                            &nbsp;&nbsp;<span style="color: var(--terminal-green);"># Let's build something amazing!</span><br>
+                            &nbsp;&nbsp;<span style="color: var(--terminal-blue);">return</span> {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--warning-color);">'collaboration'</span>: <span style="color: var(--terminal-blue);">True</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--warning-color);">'innovation'</span>: <span style="color: var(--terminal-blue);">True</span>,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--warning-color);">'coffee'</span>: <span style="color: var(--warning-color);">'Always'</span><br>
+                            &nbsp;&nbsp;}
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Let's collaborate!</h3>
+                <p>I'm always interested in new opportunities, exciting projects, and innovative ideas. Whether you need AI/ML solutions, backend development, or Telegram bot automation - let's make it happen!</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="fab fa-telegram"></i>
+                        <div>
+                            <strong>Telegram</strong><br>
+                            <a href="https://t.me/{{ about.telegram_username }}">@{{ about.telegram_username }}</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <strong>GitHub</strong><br>
+                            <a href="https://github.com/{{ about.github_username }}">{{ about.github_username }}</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-blog"></i>
+                        <div>
+                            <strong>Blog</strong><br>
+                            <a href="https://t.me/{{ about.blog_handle|slice:'1:' }}">{{ about.blog_handle }}</a>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-broadcast-tower"></i>
+                        <div>
+                            <strong>Channel</strong><br>
+                            <a href="https://t.me/{{ about.channel_handle|slice:'1:' }}">{{ about.channel_handle }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="contact-form animate-on-scroll" id="contact-form" action="{% url 'main:contact_submit' %}">
+                <div class="form-header">
+                    <h3><i class="fas fa-envelope"></i> Send Message</h3>
+                    <div class="code">// Fill out the form below</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">
+                        <i class="fas fa-user"></i> Name
+                    </label>
+                    <input type="text" name="name" id="name" placeholder="Your Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" name="email" id="email" placeholder="your.email@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">
+                        <i class="fas fa-tag"></i> Subject
+                    </label>
+                    <input type="text" name="subject" id="subject" placeholder="Project Collaboration" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">
+                        <i class="fas fa-comment"></i> Message
+                    </label>
+                    <textarea name="message" id="message" placeholder="Tell me about your project or idea..." rows="5" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+                
+                <div class="form-footer">
+                    <div class="code">
+                        <span style="color: var(--terminal-green);"># I'll get back to you within 24 hours!</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Developer Environment Section -->
+<section class="dev-env">
+    <div class="container">
+        <h2 class="section-title">My Developer Environment</h2>
+        <div class="dev-env-content">
+            <div class="env-item">
+                <h3>Operating System</h3>
+                <p>{{ about.operating_system }}</p>
+            </div>
+            <div class="env-item">
+                <h3>Editor</h3>
+                <p>{{ about.code_editor }}</p>
+            </div>
+            <div class="env-item">
+                <h3>Terminal</h3>
+                <p>{{ about.terminal }}</p>
+            </div>
+            <div class="env-item">
+                <h3>Version Control</h3>
+                <p>{{ about.version_control }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Skills terminal animation
+    const skillsTerminal = document.getElementById('skills-terminal');
+    if (skillsTerminal) {
+        const skills = [
+            '$ python --version',
+            'Python 3.11.0',
+            '$ pip list | grep -E "(django|tensorflow|docker)"',
+            'Django==4.2.7',
+            'tensorflow==2.13.0',
+            'docker==6.1.3',
+            '$ git log --oneline -5',
+            'a1b2c3d feat: AI model optimization',
+            'e4f5g6h fix: telegram bot webhook',
+            'i7j8k9l docs: update API documentation',
+            'l0m1n2o refactor: database queries',
+            'p3q4r5s feat: payment integration',
+            '$ echo "Ready to build amazing things!"',
+            'Ready to build amazing things! 🚀'
+        ];
+        
+        let commandIndex = 0;
+        let charIndex = 0;
+        
+        const typeCommand = () => {
+            if (commandIndex < skills.length) {
+                const currentCommand = skills[commandIndex];
+                
+                if (charIndex < currentCommand.length) {
+                    skillsTerminal.innerHTML += currentCommand.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeCommand, 30);
+                } else {
+                    skillsTerminal.innerHTML += '\n';
+                    commandIndex++;
+                    charIndex = 0;
+                    setTimeout(typeCommand, commandIndex % 2 === 0 ? 500 : 1000);
+                }
+            }
+        };
+        
+        // Start animation when skills section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(typeCommand, 1000);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        observer.observe(skillsTerminal);
+    }
+    
+    // Add hover effects to project cards
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Add typing effect to hero title
+    const heroTitle = document.querySelector('.typing-text');
+    if (heroTitle) {
+        const text = heroTitle.textContent;
+        heroTitle.textContent = '';
+        heroTitle.classList.add('typing-animation');
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                heroTitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                heroTitle.classList.remove('typing-animation');
+            }
+        };
+        
+        setTimeout(typeWriter, 1500);
+    }
+});
+</script>
+{% endblock %}
