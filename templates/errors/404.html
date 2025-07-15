@@ -78,42 +78,12 @@
             <div class="error-code">404</div>
             <h1 class="error-title">Page Not Found</h1>
             <p class="error-description">
-                Oops! The page you're looking for seems to have vanished into the digital void. 
-                Don't worry, even the best developers encounter 404s!
+                The page you're looking for doesn't exist.
             </p>
             
-            <div class="error-terminal">
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <div class="terminal-dot red"></div>
-                            <div class="terminal-dot yellow"></div>
-                            <div class="terminal-dot green"></div>
-                        </div>
-                        <div class="terminal-title">error.log</div>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="code">
-                            <span style="color: var(--error-color);">ERROR 404:</span> <span style="color: var(--secondary-text);">Page not found</span><br>
-                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">find</span> <span style="color: var(--warning-color);">{{ request.path }}</span><br>
-                            <span style="color: var(--secondary-text);">find: '{{ request.path }}': No such file or directory</span><br>
-                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">ls</span> <span style="color: var(--warning-color);">available_pages/</span><br>
-                            <span style="color: var(--accent-text);">home.html  about.html  projects.html</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="error-actions">
-                <a href="{% url 'main:home' %}" class="btn btn-primary">
-                    <i class="fas fa-home"></i> Go Home
-                </a>
-                <a href="{% url 'main:projects' %}" class="btn btn-secondary">
-                    <i class="fas fa-code"></i> View Projects
-                </a>
-                <a href="{% url 'main:about' %}" class="btn btn-outline">
-                    <i class="fas fa-user"></i> About Me
-                </a>
+            <div class="mt-20">
+                <a href="{% url 'main:home' %}" class="btn btn-primary">Go Home</a>
+                <a href="{% url 'main:projects' %}" class="btn">View Projects</a>
             </div>
         </div>
     </div>

@@ -76,45 +76,14 @@
     <div class="container">
         <div class="error-content">
             <div class="error-code">500</div>
-            <h1 class="error-title">Internal Server Error</h1>
+            <h1 class="error-title">Server Error</h1>
             <p class="error-description">
-                Something went wrong on our end. Our servers are having a moment - 
-                like when your code works on your machine but not in production!
+                Something went wrong on our end. Please try again later.
             </p>
             
-            <div class="error-terminal">
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <div class="terminal-dot red"></div>
-                            <div class="terminal-dot yellow"></div>
-                            <div class="terminal-dot green"></div>
-                        </div>
-                        <div class="terminal-title">server.log</div>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="code">
-                            <span style="color: var(--error-color);">ERROR 500:</span> <span style="color: var(--secondary-text);">Internal server error</span><br>
-                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">systemctl</span> <span style="color: var(--warning-color);">status</span> <span style="color: var(--accent-text);">portfolio</span><br>
-                            <span style="color: var(--error-color);">●</span> <span style="color: var(--secondary-text);">portfolio.service - Portfolio Application</span><br>
-                            <span style="color: var(--warning-color);">   Active: </span><span style="color: var(--error-color);">failed</span> <span style="color: var(--secondary-text);">(Result: exit-code)</span><br>
-                            <span style="color: var(--terminal-blue);">$</span> <span style="color: var(--terminal-green);">sudo</span> <span style="color: var(--warning-color);">systemctl</span> <span style="color: var(--accent-text);">restart</span> <span style="color: var(--terminal-green);">portfolio</span><br>
-                            <span style="color: var(--terminal-green);">Restarting service...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="error-actions">
-                <a href="{% url 'main:home' %}" class="btn btn-primary">
-                    <i class="fas fa-home"></i> Go Home
-                </a>
-                <a href="javascript:location.reload()" class="btn btn-secondary">
-                    <i class="fas fa-redo"></i> Try Again
-                </a>
-                <a href="#contact" class="btn btn-outline">
-                    <i class="fas fa-envelope"></i> Report Issue
-                </a>
+            <div class="mt-20">
+                <a href="{% url 'main:home' %}" class="btn btn-primary">Go Home</a>
+                <a href="javascript:location.reload()" class="btn">Try Again</a>
             </div>
         </div>
     </div>

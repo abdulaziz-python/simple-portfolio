@@ -202,93 +202,35 @@ kbd {
 <!-- Hero Section -->
 <section class="hero">
     <div class="container">
-        <div class="hero-content">
-            <div class="hero-text animate-on-scroll">
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <div class="terminal-dot red"></div>
-                            <div class="terminal-dot yellow"></div>
-                            <div class="terminal-dot green"></div>
-                        </div>
-                        <div class="terminal-title">~/developer/abdulaziz</div>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="code">
-                            <span style="color: var(--terminal-blue);">class</span> 
-                            <span style="color: var(--terminal-orange);">Developer</span>:<br>
-                            &nbsp;&nbsp;<span style="color: var(--terminal-blue);">def</span> 
-                            <span style="color: var(--terminal-green);">__init__</span>(self):<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;self.name = <span style="color: var(--warning-color);">"{{ about.name }}"</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;self.role = <span style="color: var(--warning-color);">"{{ about.title }}"</span><br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;self.passion = <span style="color: var(--warning-color);">"AI/ML & Backend"</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <h1 class="hero-title">
-                    Hi, I'm <span class="highlight typing-text">{{ about.name }}</span>
-                </h1>
-                <h2 class="hero-subtitle">{{ about.title }}</h2>
-                <p class="hero-description">{{ about.description }}</p>
-                
-                <div class="hero-buttons">
-                    <a href="{% url 'main:projects' %}" class="btn btn-primary">
-                        <i class="fas fa-code"></i> View Projects
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-envelope"></i> Get In Touch
-                    </a>
-                    {% if about.resume_file %}
-                        <a href="{{ about.resume_file.url }}" target="_blank" class="btn btn-outline">
-                            <i class="fas fa-download"></i> Resume
-                        </a>
-                    {% endif %}
-                </div>
-                
-                <div class="hero-social">
-                    <a href="https://github.com/{{ about.github_username }}" target="_blank" rel="noopener" title="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://t.me/{{ about.telegram_username }}" target="_blank" rel="noopener" title="Telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="https://t.me/{{ about.blog_handle|slice:'1:' }}" target="_blank" rel="noopener" title="Blog">
-                        <i class="fas fa-blog"></i>
-                    </a>
-                    <a href="https://t.me/{{ about.channel_handle|slice:'1:' }}" target="_blank" rel="noopener" title="Channel">
-                        <i class="fas fa-broadcast-tower"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="hero-image animate-on-scroll">
-                <div class="image-container">
-                    {% if about.profile_image %}
-                        <img src="{{ about.profile_image.url }}" alt="{{ about.name }}">
-                    {% else %}
-                        <div class="placeholder-image">
-                            <i class="fas fa-user-astronaut"></i>
-                        </div>
-                    {% endif %}
-                    
-                    <!-- Floating elements -->
-                    <div class="floating-elements">
-                        <div class="floating-element" style="--delay: 0s;">
-                            <i class="fab fa-python"></i>
-                        </div>
-                        <div class="floating-element" style="--delay: 1s;">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div class="floating-element" style="--delay: 2s;">
-                            <i class="fab fa-docker"></i>
-                        </div>
-                        <div class="floating-element" style="--delay: 3s;">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <h1>{{ about.name }}</h1>
+        <p class="subtitle">{{ about.title }}</p>
+        <p class="description">{{ about.description }}</p>
+        
+        <div class="hero-buttons">
+            <a href="{% url 'main:projects' %}" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn">Get In Touch</a>
+            {% if about.resume_file %}
+                <a href="{{ about.resume_file.url }}" target="_blank" class="btn">Resume</a>
+            {% endif %}
+        </div>
+        
+        <div class="social-links">
+            <a href="https://github.com/{{ about.github_username }}" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+                <span class="copy-hint">Copy GitHub URL</span>
+            </a>
+            <a href="https://t.me/{{ about.telegram_username }}" target="_blank" title="Telegram">
+                <i class="fab fa-telegram"></i>
+                <span class="copy-hint">Copy Telegram URL</span>
+            </a>
+            <a href="https://t.me/{{ about.blog_handle|slice:'1:' }}" target="_blank" title="Blog">
+                <i class="fas fa-blog"></i>
+                <span class="copy-hint">Copy Blog URL</span>
+            </a>
+            <a href="https://t.me/{{ about.channel_handle|slice:'1:' }}" target="_blank" title="Channel">
+                <i class="fas fa-broadcast-tower"></i>
+                <span class="copy-hint">Copy Channel URL</span>
+            </a>
         </div>
     </div>
 </section>
@@ -296,71 +238,55 @@ kbd {
 <!-- Skills Section -->
 <section class="skills">
     <div class="container">
-        <h2 class="section-title">
-            <i class="fas fa-terminal"></i> Technologies & Skills
-        </h2>
-        
-        <div class="skills-terminal animate-on-scroll">
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-dots">
-                        <div class="terminal-dot red"></div>
-                        <div class="terminal-dot yellow"></div>
-                        <div class="terminal-dot green"></div>
-                    </div>
-                    <div class="terminal-title">skills.sh</div>
-                </div>
-                <div class="terminal-content" id="skills-terminal">
-                    <!-- Terminal content will be populated by JavaScript -->
-                </div>
-            </div>
-        </div>
+        <h2 class="section-title">Skills & Technologies</h2>
         
         <div class="skills-grid">
             {% for skill in about.skills|split:"," %}
-                {% skill_card skill %}
+                <div class="skill-item">
+                    <span>{{ skill|trim }}</span>
+                </div>
             {% endfor %}
         </div>
     </div>
 </section>
 
 <!-- Featured Projects -->
-<section class="featured-projects">
+<section class="projects">
     <div class="container">
-        <h2 class="section-title">
-            <i class="fas fa-star"></i> Featured Projects
-        </h2>
+        <h2 class="section-title">Featured Projects</h2>
         
         <div class="projects-grid">
             {% for project in featured_projects %}
-                {% project_card project %}
-            {% empty %}
-                <div class="no-projects animate-on-scroll">
-                    <div class="terminal">
-                        <div class="terminal-header">
-                            <div class="terminal-dots">
-                                <div class="terminal-dot red"></div>
-                                <div class="terminal-dot yellow"></div>
-                                <div class="terminal-dot green"></div>
-                            </div>
-                            <div class="terminal-title">projects.py</div>
-                        </div>
-                        <div class="terminal-content">
-                            <div class="code">
-                                <span style="color: var(--terminal-blue);">print</span>(<span style="color: var(--warning-color);">"Projects loading..."</span>)<br>
-                                <span style="color: var(--terminal-green);"># Exciting projects coming soon!</span>
-                            </div>
-                        </div>
+                <div class="project-card">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description|truncatewords:25 }}</p>
+                    
+                    <div class="project-tech">
+                        {% for framework in project.get_frameworks_list %}
+                            <span class="tech-tag">{{ framework }}</span>
+                        {% endfor %}
                     </div>
+                    
+                    <div class="project-links">
+                        {% if project.project_link %}
+                            <a href="{{ project.project_link }}" target="_blank">Live Demo</a>
+                        {% endif %}
+                        {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank">Source Code</a>
+                        {% endif %}
+                        <a href="{% url 'main:project_detail' project.id %}">Details</a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="no-content">
+                    <p>Projects coming soon...</p>
                 </div>
             {% endfor %}
         </div>
         
         {% if featured_projects %}
-            <div class="text-center animate-on-scroll">
-                <a href="{% url 'main:projects' %}" class="btn btn-primary">
-                    <i class="fas fa-folder-open"></i> View All Projects
-                </a>
+            <div class="text-center mt-20">
+                <a href="{% url 'main:projects' %}" class="btn">View All Projects</a>
             </div>
         {% endif %}
     </div>
@@ -369,139 +295,56 @@ kbd {
 <!-- Contact Section -->
 <section id="contact" class="contact">
     <div class="container">
-        <h2 class="section-title">
-            <i class="fas fa-terminal"></i> Get In Touch
-        </h2>
+        <h2 class="section-title">Get In Touch</h2>
         
         <div class="contact-content">
-            <div class="contact-info animate-on-scroll">
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <div class="terminal-dot red"></div>
-                            <div class="terminal-dot yellow"></div>
-                            <div class="terminal-dot green"></div>
-                        </div>
-                        <div class="terminal-title">contact.py</div>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="code">
-                            <span style="color: var(--terminal-blue);">def</span> 
-                            <span style="color: var(--terminal-green);">connect</span>():<br>
-                            &nbsp;&nbsp;<span style="color: var(--terminal-green);"># Let's build something amazing!</span><br>
-                            &nbsp;&nbsp;<span style="color: var(--terminal-blue);">return</span> {<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--warning-color);">'collaboration'</span>: <span style="color: var(--terminal-blue);">True</span>,<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--warning-color);">'innovation'</span>: <span style="color: var(--terminal-blue);">True</span>,<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: var(--warning-color);">'coffee'</span>: <span style="color: var(--warning-color);">'Always'</span><br>
-                            &nbsp;&nbsp;}
-                        </div>
-                    </div>
-                </div>
-                
-                <h3>Let's collaborate!</h3>
-                <p>I'm always interested in new opportunities, exciting projects, and innovative ideas. Whether you need AI/ML solutions, backend development, or Telegram bot automation - let's make it happen!</p>
+            <div class="contact-info">
+                <h3>Let's work together</h3>
+                <p>I'm always interested in new opportunities and exciting projects. Whether you need AI/ML solutions, backend development, or Telegram bot automation.</p>
                 
                 <div class="contact-methods">
                     <div class="contact-method">
-                        <i class="fab fa-telegram"></i>
-                        <div>
-                            <strong>Telegram</strong><br>
-                            <a href="https://t.me/{{ about.telegram_username }}">@{{ about.telegram_username }}</a>
-                        </div>
+                        <strong>Telegram</strong>
+                        <a href="https://t.me/{{ about.telegram_username }}">@{{ about.telegram_username }}</a>
                     </div>
                     <div class="contact-method">
-                        <i class="fab fa-github"></i>
-                        <div>
-                            <strong>GitHub</strong><br>
-                            <a href="https://github.com/{{ about.github_username }}">{{ about.github_username }}</a>
-                        </div>
+                        <strong>GitHub</strong>
+                        <a href="https://github.com/{{ about.github_username }}">{{ about.github_username }}</a>
                     </div>
                     <div class="contact-method">
-                        <i class="fas fa-blog"></i>
-                        <div>
-                            <strong>Blog</strong><br>
-                            <a href="https://t.me/{{ about.blog_handle|slice:'1:' }}">{{ about.blog_handle }}</a>
-                        </div>
+                        <strong>Blog</strong>
+                        <a href="https://t.me/{{ about.blog_handle|slice:'1:' }}">{{ about.blog_handle }}</a>
                     </div>
                     <div class="contact-method">
-                        <i class="fas fa-broadcast-tower"></i>
-                        <div>
-                            <strong>Channel</strong><br>
-                            <a href="https://t.me/{{ about.channel_handle|slice:'1:' }}">{{ about.channel_handle }}</a>
-                        </div>
+                        <strong>Channel</strong>
+                        <a href="https://t.me/{{ about.channel_handle|slice:'1:' }}">{{ about.channel_handle }}</a>
                     </div>
                 </div>
             </div>
             
-            <form class="contact-form animate-on-scroll" id="contact-form" action="{% url 'main:contact_submit' %}">
-                <div class="form-header">
-                    <h3><i class="fas fa-envelope"></i> Send Message</h3>
-                    <div class="code">// Fill out the form below</div>
+            <form class="contact-form" id="contact-form" action="{% url 'main:contact_submit' %}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="name">
-                        <i class="fas fa-user"></i> Name
-                    </label>
-                    <input type="text" name="name" id="name" placeholder="Your Name" required>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">
-                        <i class="fas fa-envelope"></i> Email
-                    </label>
-                    <input type="email" name="email" id="email" placeholder="your.email@example.com" required>
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="subject">
-                        <i class="fas fa-tag"></i> Subject
-                    </label>
-                    <input type="text" name="subject" id="subject" placeholder="Project Collaboration" required>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="5" required></textarea>
                 </div>
                 
-                <div class="form-group">
-                    <label for="message">
-                        <i class="fas fa-comment"></i> Message
-                    </label>
-                    <textarea name="message" id="message" placeholder="Tell me about your project or idea..." rows="5" required></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i> Send Message
-                </button>
-                
-                <div class="form-footer">
-                    <div class="code">
-                        <span style="color: var(--terminal-green);"># I'll get back to you within 24 hours!</span>
-                    </div>
-                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
             </form>
-        </div>
-    </div>
-</section>
-
-<!-- Developer Environment Section -->
-<section class="dev-env">
-    <div class="container">
-        <h2 class="section-title">My Developer Environment</h2>
-        <div class="dev-env-content">
-            <div class="env-item">
-                <h3>Operating System</h3>
-                <p>{{ about.operating_system }}</p>
-            </div>
-            <div class="env-item">
-                <h3>Editor</h3>
-                <p>{{ about.code_editor }}</p>
-            </div>
-            <div class="env-item">
-                <h3>Terminal</h3>
-                <p>{{ about.terminal }}</p>
-            </div>
-            <div class="env-item">
-                <h3>Version Control</h3>
-                <p>{{ about.version_control }}</p>
-            </div>
         </div>
     </div>
 </section>
